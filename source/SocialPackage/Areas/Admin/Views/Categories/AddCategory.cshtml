@@ -1,0 +1,37 @@
+@model SocialPackage.Infrastructure.Entities.Category
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Новая категория</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table nohover">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+
+            <td>
+                @Html.ValidationMessageFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            </td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Color)</td>
+            <td>
+                @Html.ValidationMessageFor(model => model.Color)
+                @Html.TextBoxFor(model => model.Color, new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input class="load btn btn-primary" type="submit" value="Сохранить" />
+            </td>
+        </tr>
+    </table>
+}

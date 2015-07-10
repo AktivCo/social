@@ -1,0 +1,101 @@
+@model SocialPackage.Areas.Admin.Models.UserViewModel
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="title">Новый пользователь</div>
+<hr />
+<div ng-controller="AddUsrCtrl" ng-init="GetAllLimits(@Json.Encode(@Model.AvailLimits))">
+    <table class="table nohover">
+        <thead>
+            <tr>
+                <th>Выберите сотрудника</th>
+                <th>
+                    @Html.DropDownListFor(model => model.FullName, new SelectList(new List<AdUsers.AdUser>(), "Name", "FullName", 0), "-", new { @class = "form-control", ng_model = "loginselect", ng_options = "i.CN for i in availUsers", ng_change = "UserChange()" })
+                    @Html.ValidationMessageFor(model => model.FullName)
+                    @*{{loginselect.Login}}*@
+                </th>
+            </tr>
+        </thead>
+        <tr>
+            <td style="border-top:none" colspan="2">
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table style="margin-top:0 " class="table" ng-show="loginselect != ''" ng-hide="loginselect == ''">
+                        @*для LDAP*@
+                        @* <table class=" table table-bordered">*@
+                        <tr>
+                            <td style="border:none">@Html.LabelFor(model => model.FullName)</td>
+                            <td style="border:none">
+                                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", ng_model = "loginselect.CN", placeholder = "Отображаемое имя", @readonly = "" })
+                                @Html.ValidationMessageFor(model => model.FullName)
+                                <input type="hidden" id="Login" name="Login" value="{{loginselect.Sid}}" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.Email)</td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", ng_model = "loginselect.Mail", placeholder = "e-mail", @readonly = "" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.Roles)</td>
+                            <td>
+                                <ul>
+                                    @foreach (var r in Model.allRoles)
+                                    {
+                                        <li>
+                                            <input type="checkbox"
+                                                   name="SelectedRoles" value="@r.RoleId" id="@r.RoleId"
+                                                   @{if (Model.SelectedRoles.Contains(r.RoleId)) { <text> checked='checked' </text>        } } />
+                                            <label for="@r.RoleId">@r.RoleName</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.Limit)</td>
+                            <td>
+                                @Html.DropDownListFor(mode => Model.SelectedLimitId
+                               , new SelectList(Model.AvailLimits.Select(el => new { LimitId = el.Id, Name = el.Name }), "LimitId", "Name")
+                            , new { @class = "form-control", ng_model = "limitId", ng_change = "LimitChange()" })
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.realProezdLimit)</td>
+                            <td>@Html.TextBoxFor(model => model.realProezdLimit, new { @class = "form-control", ng_model = "RealLimit.Proezd" })</td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.realFitnesLimit)</td>
+                            <td>@Html.TextBoxFor(model => model.realFitnesLimit, new { @class = "form-control", ng_model = "RealLimit.Fitnes" })</td>
+                        </tr>
+
+                        <tr>
+                            <td>@Html.LabelFor(model => model.realCultureEvent)</td>
+                            <td>@Html.TextBoxFor(model => model.realCultureEvent, new { @class = "form-control", ng_model = "RealLimit.CultureEvents" })</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><input type="submit" class="load btn btn-primary" value="Сохранить" /></td>
+                        </tr>
+                    </table>
+
+
+
+                }
+            </td>
+        </tr>
+    </table>
+</div>

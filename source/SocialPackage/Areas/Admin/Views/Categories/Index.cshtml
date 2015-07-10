@@ -1,0 +1,32 @@
+@model List<SocialPackage.Infrastructure.Entities.Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Категории</h2>
+@Html.ActionLink("Добавить", "AddCategory", null, new { @class = "load btn btn-primary" })
+<table style="margin-top:0" class="table nohover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Цвет</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in Model)
+        {
+            <tr>
+                <td> @cat.id</td>
+                <td>@cat.Name</td>
+                <td><div style="color:white ;background-color:@cat.Color;">@cat.Color</div></td>
+                <td>@Html.ActionLink("Редактировать", "Edit", new { id = cat.id }, new { @class = "load btn btn-primary" })</td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>

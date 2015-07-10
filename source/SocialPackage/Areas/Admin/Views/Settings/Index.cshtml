@@ -1,0 +1,9 @@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="title">Настройки</div>
+<hr />
+
+@Html.Partial("_SettingsPartial", new SocialPackage.Areas.Admin.Models.SettingsViewModel { IsStart = false })

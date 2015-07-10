@@ -1,0 +1,14 @@
+D:\gt\SocialPackage\AktivUsers\bin\Debug\AktivUsers.dll
+D:\gt\SocialPackage\AktivUsers\bin\Debug\AktivUsers.pdb
+D:\gt\SocialPackage\AktivUsers\obj\Debug\AdUsers.csprojResolveAssemblyReference.cache
+D:\gt\SocialPackage\AktivUsers\obj\Debug\Interop.ActiveDs.dll
+D:\gt\SocialPackage\AktivUsers\obj\Debug\AdUsers.csproj.ResolveComReference.cache
+D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.dll
+D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.pdb
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\bin\Debug\AktivUsers.dll
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\bin\Debug\AktivUsers.pdb
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\obj\Debug\Interop.ActiveDs.dll
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\obj\Debug\AdUsers.csproj.ResolveComReference.cache
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\obj\Debug\AktivUsers.dll
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\obj\Debug\AktivUsers.pdb
+C:\Users\lytkin\Documents\Visual Studio 2013\Projects\SocialPackagePublic\AktivUsers\obj\Debug\AdUsers.csprojResolveAssemblyReference.cache

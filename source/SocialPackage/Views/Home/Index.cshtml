@@ -1,0 +1,162 @@
+@using SocialPackage.Code
+@model List<SocialPackage.Infrastructure.Entities.Bid>
+
+
+@*<script type="text/ng-template" id="uploadWindow.html">
+        <div tabindex="-1" role="dialog" class="modal fade" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" data-ng-click="close($event)">
+            <div class="modal-dialog" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}">
+                <div ng-transclude></div>
+            </div>
+        </div>
+    </script>*@
+
+<script type="text/ng-template" id="RulesModal.html">
+
+    <div class="modal-content">
+        <div class="modal-header ModalHead">
+            <h3><b>Правила <span style="color: red;">предоставления</span> компенсации по соц. пакету:</b></h3>
+        </div>
+        <div class="modal-body">
+            @*<span style="white-space: pre;" ng-bind="Settings.Rules"></span>*@
+            <span ng-bind-html="Settings.Rules"></span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="close()">Закрыть</button>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="uploadModal.html">
+
+    <div class="container">
+        <div class="doc" ng-thumb="{file:image,height:400, width:300}"></div>
+        <div class="modalform">
+            <form name="form.BidForm" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <input type="text" name="Summa" required ng-model="Data.Sum" class="form-control" placeholder="Сумма"><div class="symbol">руб.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        @* <input ui-date="DateOptions" required name="Date" id="datepicker" ng-model="Data.Date" class="form-control" placeholder="Дата">*@
+
+                        <input class="form-control" required datetimez data-ng-model="Data.Date" type="text" id="datepicker1" name="Date" placeholder="Дата" />
+
+                    </div>
+                </div>
+                <div ng-show="common('currentUser').Roles.indexOf('Секретарь') != -1 || common('currentUser').Roles.indexOf('Администратор') != -1" class="form-group">
+
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <select ng-model="ForUser.user" class="form-control" ng-change="getCategories()" ng-options="user.FullName for user in ChoseUsers | orderBy:'FullName'"></select><div class="glyphicon symbol glyphicon-chevron-down" aria-hidden="true"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <select ng-model="SelectedCat.category" ng-style="{color:SelectedCat.category.Color}" ng-options="cat.Name for cat in Categories" options-color class="form-control"></select><div class="glyphicon symbol glyphicon-chevron-down" aria-hidden="true"></div>
+                        <span ng-show="error" class="error">{{error}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-xs-offset-1 col-xs-5">
+                        <button ng-click="Save()" class="btn btn-primary">Загрузить</button>
+                        @*<input type="submit" class="btn btn-primary" value="Загрузить" />*@
+                    </div>
+                    <div class="col-xs-5">
+                        <button ng-click="close()" class="btn btn-default">Отменить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</script>
+
+<div ng-controller="FileUpload" nv-file-drop uploader="uploader">
+
+    <div class="title">Мои заявки</div>
+    <hr />
+    @*<button  class="load btn btn-primary">Загрузить</button>*@
+    @*@Html.ActionLink("Загрузить", "Upload", null, new { @class = "load btn btn-primary", style = "position: absolute;top: 40px;right: 40px;border-radius: 2px;" })*@
+
+
+    @*<button style="z-index:1" nv-file-select="" uploader="uploader" class="load btn btn-primary">Загрузить</button>*@
+    <button style="z-index: 1;" ng-click="ShowRules()" class="load btn btn-danger buttonTop blockButton">Правила</button>
+    <fileselect></fileselect>
+
+    @if (!Model.Any())
+    {
+
+        <div nv-file-drop uploader="uploader">
+            <div nv-file-over uploader="uploader" class="forload">
+                <div class="title">Перетащите чек сюда</div>
+                <div>Перетащите фотографию чека в браузер, <br /> или загрузите с помощью кнопки в верхней области</div>
+            </div>
+        </div>
+
+
+    }
+    else
+    {
+        <div nv-file-over uploader="uploader" style="position: absolute; top: 10px; left: 10px; right: 10px; bottom: 70px;">
+        </div>
+        @*<button class="load btn btn-primary">Загрузить</button>*@
+
+        <table style="z-index:2" class="table nohover">
+            <thead>
+                <tr>
+                    <th>СУММА</th>
+                    <th>КАТЕГОРИЯ</th>
+                    <th>ДАТА</th>
+                    <th>СТАТУС</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bid in Model)
+                {
+                    <tr>
+                        <td>@bid.Summ руб.</td>
+                        <td><span style="color:@bid.category.Color" class=" glyphicon glyphicon-one-fine-dot"></span>@bid.category.Name</td>
+                        <td>@bid.Date.ToViewString()</td>
+                        @{
+                    switch (bid.Status)
+                    {
+                        case SocialPackage.Infrastructure.Entities.BidStatus.Approved:
+                            <td style="color: #3ec172">Утвержден</td>
+                            break;
+                        case SocialPackage.Infrastructure.Entities.BidStatus.Paid:
+                        <td style="color: #3ec172">Оплачен</td>
+                            break;
+                        case SocialPackage.Infrastructure.Entities.BidStatus.Uploaded:
+                        <td>Загружен</td>
+                            break;
+                        case SocialPackage.Infrastructure.Entities.BidStatus.Declined:
+                        <td style="opacity: .6">Отклонен</td>
+                            break;
+
+                    }
+                    <td>
+                        @if (bid.Status == SocialPackage.Infrastructure.Entities.BidStatus.Uploaded)
+                        {
+                            <span ng-click="delete(@bid.id)" class="glyphicon glyphicon-remove"></span>
+                        }
+                    </td>
+                        }
+
+                        @* <td>@Html.DisplayNameFor(model => bid.Status)</td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+
+</div>

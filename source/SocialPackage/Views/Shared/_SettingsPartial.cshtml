@@ -1,0 +1,138 @@
+@model SocialPackage.Areas.Admin.Models.SettingsViewModel
+
+<div ng-controller="SettingsCtrl">
+
+    <div ng-show="errors">
+        <span class="error" ng-repeat="er in errors"><p>{{er}}</p></span>
+    </div>
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Конфигурация домена</h4>
+        </div>
+        <div class="panel-body">
+            <h6>Введите полное наименование контроллера домена или IP-адрес</h6>
+            <input class="form-control" type="text" ng-model="Settings.Domain" placeholder="domaincontroller.mydomain.ru"
+                   @if (Model.IsStart == false) { @: readonly=""
+                                      } />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Конфигурация почты</h4>
+        </div>
+        <div class="panel-body">
+            <h4>Адрес SMTP-сервера</h4>
+            <h6>Введите полное наименование SMTP-сервера или IP-адрес</h6>
+            <input class="form-control" type="text" ng-model="Settings.Host" placeholder="smtp.mydomain.ru" />
+
+            <hr />
+            <h4>Порт SMTP-сервера</h4>
+            <h6>Введите порт SMTP-сервера</h6>
+            <input class="form-control" type="text" ng-model="Settings.Port" placeholder="25" />
+            <hr />
+            <h4>Сервисная учетная запись почты</h4>
+            <h6>Укажите наименование учетной записи почты, которая будет использоваться системой для отправки сообщений </h6>
+            <input class="form-control" type="text" ng-model="Settings.ServiceEmailUser" placeholder="social@mycompany.ru" />
+            <hr />
+            <h4>Пароль сервисной учетной записи почты</h4>
+            <h6>Укажите пароль учетной записи почты, которая будет использоваться системой для отправки сообщений </h6>
+            <input class="form-control" type="text" ng-model="Settings.ServiceEmailPassword" placeholder="password" />
+            <hr />
+            <h4>Email (мониторинг)</h4>
+            <h6>Укажите наименование почтового ящика для получения сообщений о событиях, произошедших в системе</h6>
+            <input class="form-control" type="text" ng-model="Settings.Email" />
+
+        </div>
+    </div>
+
+    <hr />
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Внесите правила использования сервиса</div>
+        <div text-angular ng-model="Settings.Rules"></div>
+    </div>
+
+
+    @if (Model.IsStart)
+    {
+        <button style="margin-top:10px" class="load btn btn-primary" ng-click="SaveStart()">Сохранить</button>
+        <script type="text/ng-template" id="AddUser.html">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 ng-hide="userError"><b>Выберите администратора системы:</b></h3>
+                    <h3 ng-show="userError" class="error text-center">{{userError}}</h3>
+                </div>
+                <div ng-hide="userError" class="modal-body">
+                    <table class="table nohover">
+                        <thead>
+                            <tr>
+                                <th>Выберите сотрудника</th>
+                                <th>
+                                    @Html.DropDownListFor(model => model.User.FullName, new SelectList(new List<AdUsers.AdUser>(), "Name", "FullName", 0), "-", new { @class = "form-control", ng_model = "loginselect", ng_options = "i.CN for i in availUsers" })
+                                    @Html.ValidationMessageFor(model => model.User.FullName)
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td style="border-top:none" colspan="2">
+
+                                @using (Html.BeginForm("Index", "StartSettings", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <table style="margin-top:0 " class="table" ng-show="loginselect != ''" ng-hide="loginselect == ''">
+                                        @*для LDAP*@
+                                        @* <table class=" table table-bordered">*@
+                                        <tr>
+                                            <td style="border:none">@Html.LabelFor(model => model.User.FullName)</td>
+                                            <td style="border:none">
+                                                @Html.TextBoxFor(model => model.User.FullName, new { @class = "form-control", ng_model = "loginselect.CN", placeholder = "Отображаемое имя", @readonly = "" })
+                                                @Html.ValidationMessageFor(model => model.User.FullName)
+                                                <input type="hidden" id="User.Login" name="User.Login" value="{{loginselect.Sid}}" />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.User.Email)</td>
+                                            <td>
+                                                @Html.TextBoxFor(model => model.User.Email, new { @class = "form-control", ng_model = "loginselect.Mail", placeholder = "e-mail", @readonly = "" })
+                                                @Html.ValidationMessageFor(model => model.User.Email)
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2"><input type="submit" class="load btn btn-primary" value="Сохранить" /></td>
+                                        </tr>
+                                    </table>
+
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer left" ng-show="userError">
+                    <button type="button" class=" btn btn-danger" ng-click="close()">Закрыть</button>
+                </div>
+            </div>
+
+
+        </script>
+
+    }
+    else
+    {
+        <button style="margin-top:10px" class="load btn btn-primary" ng-click="Save()">Сохранить</button>
+    }
+
+
+</div>
+

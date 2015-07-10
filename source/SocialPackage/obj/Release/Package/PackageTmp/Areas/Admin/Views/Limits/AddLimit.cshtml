@@ -1,0 +1,63 @@
+@model SocialPackage.Infrastructure.Entities.Limit
+@{
+    ViewBag.Title = "AddLimit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="title">Новый лимит</div>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table nohover">
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)</td>
+            <td>
+                @Html.ValidationMessageFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Fitnes)
+            </td>
+
+            <td>
+                @Html.ValidationMessageFor(model => model.Fitnes)
+                @Html.TextBoxFor(model => model.Fitnes, new { @class = "form-control" })
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Proezd)
+            </td>
+
+            <td>
+                @Html.ValidationMessageFor(model => model.Proezd)
+                @Html.TextBoxFor(model => model.Proezd, new { @class = "form-control" })
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.CultureEvents)
+            </td>
+
+            <td>
+                @Html.ValidationMessageFor(model => model.CultureEvents)
+                @Html.TextBoxFor(model => model.CultureEvents, new { @class = "form-control" })
+            </td>
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input class="load btn btn-primary" type="submit" value="Сохранить" />
+            </td>
+        </tr>
+    </table>
+}

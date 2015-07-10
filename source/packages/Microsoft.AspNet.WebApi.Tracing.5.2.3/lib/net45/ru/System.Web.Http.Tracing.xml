@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Web.Http.Tracing</name>
+  </assembly>
+  <members>
+    <member name="T:System.Web.Http.HttpConfigurationTracingExtensions">
+      <summary>Этот статический класс содержит вспомогательные методы, связанные с регистрацией экземпляров <see cref="T:System.Web.Http.Tracing.ITraceWriter" />.</summary>
+    </member>
+    <member name="M:System.Web.Http.HttpConfigurationTracingExtensions.EnableSystemDiagnosticsTracing(System.Web.Http.HttpConfiguration)">
+      <summary>Создает и регистрирует реализацию <see cref="T:System.Web.Http.Tracing.ITraceWriter" />, чтобы использовать для этого приложения.</summary>
+      <returns>Класс <see cref="T:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter" /> создан и зарегистрирован.</returns>
+      <param name="configuration">
+        <see cref="T:System.Web.Http.HttpConfiguration" /> для которого необходимо зарегистрировать созданный модуль записи трассировки.</param>
+    </member>
+    <member name="T:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter">
+      <summary>Реализация <see cref="T:System.Web.Http.Tracing.ITraceWriter" />, который трассируется в <see cref="T:System.Diagnostics.Trace" /></summary>
+    </member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.#ctor"></member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.Format(System.Web.Http.Tracing.TraceRecord)">
+      <summary>Форматирует содержание данного <see cref="T:System.Web.Http.Tracing.TraceRecord" /> в одиночную строку, которая содержит разделенные запятыми пары «имя-значение» для каждого свойства <see cref="T:System.Web.Http.Tracing.TraceRecord" />.</summary>
+      <returns>Строка, которая содержит разделенные запятыми пары «имя-значение»</returns>
+      <param name="traceRecord">Класс <see cref="T:System.Web.Http.Tracing.TraceRecord" />, из которого требуется получить результаты.</param>
+    </member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.FormatDateTime(System.DateTime)">
+      <summary>Форматирует <see cref="T:System.DateTime" /> для трассировки.</summary>
+      <returns>
+        <see cref="T:System.DateTime" /> форматируется в виде строки</returns>
+      <param name="dateTime">
+        <see cref="T:System.DateTime" />
+      </param>
+    </member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.FormatRequestEnvelope(System.Web.Http.Tracing.TraceRecord)">
+      <summary>Форматирует данный класс <see cref="T:System.Web.Http.Tracing.TraceRecord" /> в строке, в которой описывается, будет ли отправлен начальный или конечный ответ на получение входящего запроса, в зависимости от <see cref="T:System.Web.Http.Tracing.TraceKind" />.</summary>
+      <returns>Строка, которая содержит разделенные запятыми пары «имя-значение»</returns>
+      <param name="traceRecord">Класс <see cref="T:System.Web.Http.Tracing.TraceRecord" />, из которого требуется получить результаты.</param>
+    </member>
+    <member name="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.IsVerbose">
+      <summary>Получает или задает значение, которое указывает, будет ли форматированное сообщение в расширенном формате, то есть с отображением всех полей <see cref="T:System.Web.Http.Tracing.TraceRecord" />.</summary>
+      <returns>Значение true означает, что все поля <see cref="T:System.Web.Http.Tracing.TraceRecord" /> будут трассироваться, значение false означает, что будет трассироваться минимальная информация.По умолчанию используется значение false.</returns>
+    </member>
+    <member name="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.MinimumLevel">
+      <summary>Получает или задает минимальный уровень трассировки.</summary>
+      <returns>Любое значение <see cref="T:System.Web.Http.Tracing.TraceLevel" /> ниже этого уровня будет игнорироваться.Значение этого свойства по умолчанию — <see cref="F:System.Web.Http.Tracing.TraceLevel.Info" />.</returns>
+    </member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.Trace(System.Net.Http.HttpRequestMessage,System.String,System.Web.Http.Tracing.TraceLevel,System.Action{System.Web.Http.Tracing.TraceRecord})">
+      <summary>Записывает трассировку в <see cref="T:System.Diagnostics.Trace" />, если <paramref name="level" /> равен или превышает <see cref="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.MinimumLevel" />.</summary>
+      <param name="request">Класс <see cref="T:System.Net.Http.HttpRequestMessage" />, связанный с этой трассировкой.Он может иметь значение null, но итоговая трассировка не будет содержать идентификатор корреляции.</param>
+      <param name="category">Категория трассировки.Это может быть определенное пользователем значение.Оно не интерпретируется этой реализацией, но записывается в трассировку.</param>
+      <param name="level">
+        <see cref="T:System.Web.Http.Tracing.TraceLevel" /> этой трассировки.Если значение меньше <see cref="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.MinimumLevel" />, запрос трассировки игнорируется.</param>
+      <param name="traceAction">Пользователь задает обратный вызов, чтобы вызвать для заполнения <see cref="T:System.Web.Http.Tracing.TraceRecord" /> дополнительными сведениями для добавления трассировки.</param>
+    </member>
+    <member name="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.TraceSource">
+      <summary>Получает или задает <see cref="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.TraceSource" />, для которого отправляются трассировки.</summary>
+      <returns>Это свойство позволяет использовать настраиваемый <see cref="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.TraceSource" /> при записи трассировок.Это позволяет приложение настроить и использовать собственный объект <see cref="P:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.TraceSource" />, а не <see cref="T:System.Diagnostics.Trace" /> по умолчанию.Если значение равно — null, этот модуль записи трассировки будет отправлять трассировки в <see cref="T:System.Diagnostics.Trace" />.</returns>
+    </member>
+    <member name="M:System.Web.Http.Tracing.SystemDiagnosticsTraceWriter.TranslateHttpResponseException(System.Web.Http.Tracing.TraceRecord)">
+      <summary>Проверяет данный <see cref="T:System.Web.Http.Tracing.TraceRecord" />, чтобы определить, содержит ли он <see cref="T:System.Web.Http.HttpResponseException" />, и если содержит, изменяет <see cref="T:System.Web.Http.Tracing.TraceRecord" /> для регистрации подробных сведений.</summary>
+      <param name="traceRecord">
+        <see cref="T:System.Web.Http.Tracing.TraceRecord" /> для проверки и изменения.</param>
+    </member>
+  </members>
+</doc>

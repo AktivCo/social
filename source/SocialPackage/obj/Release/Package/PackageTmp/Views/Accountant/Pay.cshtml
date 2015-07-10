@@ -1,0 +1,98 @@
+@{
+    ViewBag.Title = "Index";
+    string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~").Remove(Url.Content("~").Length - 1));
+}
+
+<script type="text/ng-template" id="pay.html">
+
+    <div class="container">
+        <div class="doc"><img class="imageSize" ng-src="@url/bid_images/{{bid.ImageUrl}}" /></div>
+        <div style="height: auto; padding-top: 0 " class="modalform">
+            <span style="left: 280px; top:8px; cursor:pointer" ng-click="close()" class="glyphicon glyphicon-remove"></span>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <span>{{bid.BidUser.FullName}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <span>Сумма: {{bid.Summ}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <span> {{getDateString(bid.Date)}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <span>Категория: {{bid.category.Name}}</span>
+                    </div>
+                </div>
+
+
+
+                <div ng-show="bid.Status != 2" class="form-group">
+
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <textarea style="width:100%;max-width:100%" placeholder="Комментарий" rows="5" ng-model="bid.Comment"></textarea>
+                        <span ng-show="error" class="error">Поле комментарий не может быть пустым</span>
+                    </div>
+
+                </div>
+
+                <div ng-show="bid.Status != 2" class="form-group">
+                    @*<div class="col-sm-offset-1 col-sm-5">
+                            <button ng-click="Pay()" class="btn btn-success">Оплатить</button>
+
+                        </div>*@
+                    <div class="col-sm-offset-6 col-sm-5">
+                        <button ng-click="Withdraw()" class="btn btn-danger">Отозвать</button>
+                    </div>
+                </div>
+                @*<div class="form-group">
+
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <button ng-click="close()" class="btn btn-default">Закрыть</button>
+                        </div>
+                    </div>*@
+            </form>
+        </div>
+    </div>
+
+</script>
+<div class="title">Ведомость к выплате</div>
+<hr />
+<div ng-cloak ng-controller="PayBid">
+    <div>
+        <input class="form-control" required datetimez-for-pay data-ng-model="Data.Date" type="text" id="datepicker1" name="Date" placeholder="Дата" />
+    </div>
+
+    <table style="margin-top:10px" class="table">
+        <thead>
+            <tr>
+                <th>ПОЛЬЗОВАТЕЛЬ</th>
+                <th>СУММА</th>
+                <th>КАТЕГОРИЯ</th>
+                <th>ДАТА</th>
+                <th>СТАТУС</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-click="ShowApprove(bid)" ng-repeat="bid in Bids | orderBy:'BidUser.FullName'">
+                <td>{{bid.BidUser.FullName}}</td>
+                <td>{{bid.Summ}} руб.</td>
+                <td><span style="Color:{{bid.category.Color}}" class="glyphicon glyphicon-one-fine-dot"></span>{{bid.category.Name}}</td>
+                <td>{{getDateString(bid.Date)}}</td>
+                <td ng-show="bid.Status == 1" style="color: #3ec172">Утвержден</td>
+                <td ng-show="bid.Status == 2" style="color: #3ec172">Оплачен</td>
+                <td ng-show="bid.Status == 0">Загружен</td>
+                <td ng-show="bid.Status == 3" style="opacity: .6">Отклонен</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>

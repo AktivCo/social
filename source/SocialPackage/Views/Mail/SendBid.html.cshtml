@@ -1,0 +1,138 @@
+@using ActionMailer.Net.Mvc
+@model SocialPackage.Infrastructure.Entities.Bid
+
+@{
+    Layout = null;
+    // var dayleft = Model.UserStat.CurrentYearVacationsAvailable - Model.UserStat.CurrentYearVacations - Model.evt.GetNumDaysOfEvent();
+    var states = new Dictionary<int, string>()
+    {
+        {0, "загружена"},
+        {1, "утверждена"},
+        {3, "отклонена"}
+    };
+    var months = new[]{"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+   "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Заявление</title>
+    <style type="text/css">
+        html {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-size: .85em;
+            font-family: "Trebuchet MS", "Segoe UI", Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 1em;
+        }
+
+        a {
+            color: #333;
+            outline: none;
+            padding-left: 3px;
+            padding-right: 3px;
+            text-decoration: underline;
+        }
+
+            a:link, a:visited,
+            a:active, a:hover {
+                color: #333;
+            }
+
+            a:hover {
+            }
+
+        header, footer, hgroup,
+        nav, section {
+            display: block;
+        }
+
+        mark {
+            background-color: #a6dbed;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .clear-fix:after {
+            content: ".";
+            clear: both;
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+
+        h1, h2, h3,
+        h4, h5, h6 {
+            color: #555;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.75em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+        }
+
+        h5, h6 {
+            font-size: 1em;
+        }
+
+            h5 a:link, h5 a:visited, h5 a:active {
+                padding: 0;
+                text-decoration: none;
+            }
+
+        .text-danger {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Заявка @states[(int)Model.Status]</h1>
+
+        <h2>Запрос на @Model.category.Name сотрудника @Model.BidUser.FullName</h2>
+        @*<p>Заявление отправил @Model.evt.EventInitiator.FullName</p>*@
+        <p>Дата: @months[Model.Date.Month - 1]-@Model.Date.Year</p>
+        <p>Сумма: @Model.Summ руб.</p>
+
+        @if (!string.IsNullOrEmpty(Model.Comment))
+        {
+            <p>Комментарий: @Model.Comment</p>
+        }
+
+        @*<img  src="@System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath\bid_images\@Model.ImageUrl" />*@
+    </div>
+</body>
+</html>
