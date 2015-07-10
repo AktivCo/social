@@ -12,5 +12,6 @@
 
 В папке https://github.com/AktivCo/social/tree/master/docs - документация по развертыванию системы.
 
+Статья о системе http://habrahabr.ru/company/aktiv-company/blog/262275/
 
 
