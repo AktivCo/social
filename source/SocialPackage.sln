@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialPackage", "SocialPackage\SocialPackage.csproj", "{CDD04D85-8039-41E5-9A68-9B633E610FB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdUsers", "AktivUsers\AdUsers.csproj", "{8F3BFC85-5213-4484-BCD5-9D12053F04B6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionMailer.Net", "ActionMailer.Net\ActionMailer.Net.csproj", "{FAE5F1AA-2EBD-446B-ADBA-933234900DE9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionMailer.Net.Mvc", "ActionMailer.Net.Mvc\ActionMailer.Net.Mvc.csproj", "{0FC1D5C5-D46D-4C2D-B767-7E8B42AC4C13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +21,6 @@ Global
 		{8F3BFC85-5213-4484-BCD5-9D12053F04B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F3BFC85-5213-4484-BCD5-9D12053F04B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F3BFC85-5213-4484-BCD5-9D12053F04B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAE5F1AA-2EBD-446B-ADBA-933234900DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAE5F1AA-2EBD-446B-ADBA-933234900DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAE5F1AA-2EBD-446B-ADBA-933234900DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAE5F1AA-2EBD-446B-ADBA-933234900DE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FC1D5C5-D46D-4C2D-B767-7E8B42AC4C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FC1D5C5-D46D-4C2D-B767-7E8B42AC4C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FC1D5C5-D46D-4C2D-B767-7E8B42AC4C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FC1D5C5-D46D-4C2D-B767-7E8B42AC4C13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
