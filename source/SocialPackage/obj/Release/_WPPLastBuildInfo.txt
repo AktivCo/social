@@ -1,4 +1,0 @@
-PlatformName=AnyCPU
-Configuration=Release
-WPPAllFilesInSingleFolder=D:\gt\SocialPackagePublic\SocialPackage\obj\Release\Package\PackageTmp
-WebPublishProfileFile=D:\gt\SocialPackagePublic\SocialPackage\Properties\PublishProfiles\deploy.pubxml

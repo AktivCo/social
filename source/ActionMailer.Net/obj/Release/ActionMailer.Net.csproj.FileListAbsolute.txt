@@ -1,4 +1,0 @@
-D:\gt\SocialPackage\ActionMailer.Net\bin\Release\ActionMailer.Net.dll
-D:\gt\SocialPackage\ActionMailer.Net\bin\Release\ActionMailer.Net.pdb
-D:\gt\SocialPackage\ActionMailer.Net\obj\Release\ActionMailer.Net.dll
-D:\gt\SocialPackage\ActionMailer.Net\obj\Release\ActionMailer.Net.pdb

@@ -1,5 +1,0 @@
-D:\gt\SocialPackage\ActionMailer.Net\bin\Debug\ActionMailer.Net.dll
-D:\gt\SocialPackage\ActionMailer.Net\bin\Debug\ActionMailer.Net.pdb
-D:\gt\SocialPackage\ActionMailer.Net\obj\Debug\ActionMailer.Net.csprojResolveAssemblyReference.cache
-D:\gt\SocialPackage\ActionMailer.Net\obj\Debug\ActionMailer.Net.dll
-D:\gt\SocialPackage\ActionMailer.Net\obj\Debug\ActionMailer.Net.pdb

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="SocialPackage.EFDbContext-Web.config Connection String" description="SocialPackage.EFDbContext Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="Data Source=127.0.0.1;Initial Catalog=SocialPackagePublish;Persist Security Info=True;User ID=sa;Password=P@ssw0rd" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\gt\\SocialPackagePublic\\SocialPackage\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SocialPackage.EFDbContext']/@connectionString" />
-  </parameter>
-  <parameter name="SocialPackage.Infrastructure.EfDbContext-Web.config Connection String" description="SocialPackage.Infrastructure.EfDbContext Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="SocialPackage.Infrastructure.EfDbContext_ConnectionString" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\gt\\SocialPackagePublic\\SocialPackage\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SocialPackage.Infrastructure.EfDbContext']/@connectionString" />
-  </parameter>
-</parameters>

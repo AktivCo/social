@@ -1,7 +1,0 @@
-D:\gt\SocialPackage\AktivUsers\bin\Debug\AktivUsers.dll
-D:\gt\SocialPackage\AktivUsers\bin\Debug\AktivUsers.pdb
-D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.csprojResolveAssemblyReference.cache
-D:\gt\SocialPackage\AktivUsers\obj\Debug\Interop.ActiveDs.dll
-D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.csproj.ResolveComReference.cache
-D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.dll
-D:\gt\SocialPackage\AktivUsers\obj\Debug\AktivUsers.pdb

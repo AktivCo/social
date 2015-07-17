@@ -1,4 +1,4 @@
-@model SocialPackage.Areas.Admin.Models.SettingsViewModel
+﻿@model SocialPackage.Areas.Admin.Models.SettingsViewModel
 
 <div ng-controller="SettingsCtrl">
 
@@ -13,9 +13,7 @@
         </div>
         <div class="panel-body">
             <h6>Введите полное наименование контроллера домена или IP-адрес</h6>
-            <input class="form-control" type="text" ng-model="Settings.Domain" placeholder="domaincontroller.mydomain.ru"
-                   @if (Model.IsStart == false) { @: readonly=""
-                                      } />
+            <input class="form-control" type="text" ng-model="Settings.Domain" placeholder="domaincontroller.mydomain.ru" />
         </div>
     </div>
 
